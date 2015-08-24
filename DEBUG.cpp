@@ -19,15 +19,13 @@ float to_kph(float mm_per_sec)
 }
 /*------------------------------------------------------------------------*/
 //
-//  For debug, log information into a log file on the usb stick
+//  For debug, log information into a log file 
 //
 //
 static   struct tm ts;
 void Log(char* a )
 { 
    ofstream txt;
-  
-  
    txt.open (LOG_LOC, ios::app) ;
    txt <<  " " << a << endl;
    txt.close();
@@ -53,6 +51,15 @@ void Log(unsigned long text)
    txt.open (LOG_LOC, ios::app) ;
    txt << text <<endl;
    txt.close();
+}
+
+void Log(vector<double> &a, const char* loc)
+{
+	ofstream txt;
+	txt.open(loc, ios::app);
+	for (uint i = 0; i < a.size(); i++)
+		txt << a[i] << endl;
+	txt.close();
 }
 
 #if 0 //high precision timing

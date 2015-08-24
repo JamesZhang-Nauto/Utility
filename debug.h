@@ -19,6 +19,7 @@ void Log(char*);
 void Log(int);
 void Log(unsigned long);
 void Log(float);
+void Log(std::vector<double> &a, const char* loc);
 
 float to_kph(float mm_per_sec);
 double round(double d);

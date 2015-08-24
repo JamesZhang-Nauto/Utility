@@ -3,6 +3,7 @@
 #include "windows.h"
 #include <tchar.h>
 
+//save points into a file with a comma as the splitter.
 void File_op_class::save_file(wstring &save_to_fname, vector<double> &x, vector<double> &y)
 {
 	ofstream txt;
@@ -12,6 +13,7 @@ void File_op_class::save_file(wstring &save_to_fname, vector<double> &x, vector<
 	txt.close();
 }
 
+// Save loaded points into argument vectors.
 void File_op_class::save_to(vector<double> &x, vector<double> &y, const int &fft_size)
 {
 	if (!hfile)
