@@ -4,7 +4,7 @@
 #include <tchar.h>
 
 //save points into a file with a comma as the splitter.
-void File_op_class::save_file(wstring &save_to_fname, vector<double> &x, vector<double> &y)
+void File_op_class::save_to_file(wstring &save_to_fname, vector<double> &x, vector<double> &y)
 {
 	ofstream txt;
 	txt.open(save_to_fname);
@@ -12,7 +12,11 @@ void File_op_class::save_file(wstring &save_to_fname, vector<double> &x, vector<
 		txt << x[i] << "," << y[i] << endl;
 	txt.close();
 }
-
+//close the opened file.
+void File_op_class::close()
+{
+	hfile.close();
+}
 // Save loaded points into argument vectors.
 void File_op_class::save_to(vector<double> &x, vector<double> &y, const int &fft_size)
 {
@@ -53,7 +57,7 @@ void File_op_class::save_to(vector<double> &x, vector<double> &y, const int &fft
 		}
 	}
 }
-
+//check if the opened file is still valid
 bool File_op_class::isvalid()
 {
 	return (hfile.is_open());
@@ -67,7 +71,31 @@ File_op_class::File_op_class(wstring _path)
 		assert(hfile.is_open());
 	}
 }
+//load all the y points in the file into vectors.
+int File_op_class::load_file(wstring &path, vector<double> &y)
+{
+	y.clear();
+	y.reserve(600000);
 
+	wifstream file(path, ifstream::in);
+	int temp_loc = 0;
+	wchar_t temp_str[256];
+	wstring temp_string = temp_str;
+	size_t found;
+	while (file.eof() == FALSE || file.fail() == false)
+	{
+		file.getline(temp_str, 255);
+		temp_string = temp_str;
+		if (temp_string.size() > 0)
+		{
+			y.push_back(stod(temp_string));
+		}
+	}
+
+	file.close();
+	return 0;
+}
+//load all the x and y points in the file into vectors.
 int File_op_class::load_file(wstring &path, vector<double> &x, vector<double> &y)
 {
 	x.clear();
@@ -252,4 +280,20 @@ int File_op_class::load_file(wstring &path, vector<double> &x, vector<double> &y
 			GetLastError());
 	}
 #endif
+}
+
+#define PI 3.14159265358979323846
+void File_op_class::generate_sinwave(const float sampling_freq, float freq, float amp, float number, vector<double> &y)
+{
+	float delta_t = 1 / sampling_freq;
+	y.clear();
+	y.resize(0);
+	for (int i = 0; i < (int)number; ++i)
+	{
+		y.push_back
+			(
+			amp * sin(freq * 2 * PI * i / sampling_freq) 
+			);
+	}
+
 }
