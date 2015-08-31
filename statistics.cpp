@@ -15,7 +15,7 @@ namespace statistics
 	//
 	//   variance = sum[1-n][(xn - mean)^2]
 	//
-	float cal_variance(double *data, int size)
+	float cal_variance(const double *data, int size)
 	{
 		double sum = 0;
 		for (int i = 0; i < size; i++)
@@ -82,7 +82,7 @@ namespace statistics
 	}
 	float cal_avg_p2p(vector<double> &_x, vector<double> &_y, float thres)
 	{
-		assert(_x.size());
+		//assert(_x.size());
 		assert(_y.size());
 
 		float val_thres = thres;
@@ -157,7 +157,8 @@ namespace statistics
 		if (minpts.size() == 0 || maxpts.size() == 0)
 		{
 			DBOUT("no peaks are found...max = " << loc_max.second << "; min = " << loc_min.second << endl);
-			return 0;
+			avg_ampliltude_mm = fabs(loc_max.second) - fabs(loc_min.second);
+			return avg_ampliltude_mm;
 		}
 
 		// calculate amplitude and wavelength
@@ -167,7 +168,8 @@ namespace statistics
 			++maxit, ++minit)
 		{
 			amp.push_back(maxit->second - minit->second);
-			wavelength.push_back(abs(_x[maxit->first] - _x[minit->first]));
+			if (_x.size() > maxit->first && _x.size() > minit->first)
+				wavelength.push_back(abs(_x[maxit->first] - _x[minit->first]));
 		}
 
 		double sum_wl = 0;
