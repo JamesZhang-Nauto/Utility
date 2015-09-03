@@ -61,7 +61,17 @@ void Log(vector<double> &a, const char* loc)
 		txt << a[i] << endl;
 	txt.close();
 }
-
+void Log(float a, const float &interval, vector<double> &b, const char* loc)
+{
+	ofstream txt;
+	txt.open(loc, ios::app);
+	for (uint i = 0; i < b.size(); i++)
+	{
+		txt << a << "\t" << b[i] << endl;
+		a += interval;
+	}
+	txt.close();
+}
 #if 0 //high precision timing
 LARGE_INTEGER StartingTime, EndingTime, ElapsedMicroseconds;
 LARGE_INTEGER Frequency;

@@ -74,6 +74,7 @@ File_op_class::File_op_class(wstring _path)
 //load all the y points in the file into vectors.
 int File_op_class::load_file(wstring &path, vector<double> &y)
 {
+	DBOUT("Loading " << path <<endl);
 	y.clear();
 	y.reserve(600000);
 
@@ -93,11 +94,15 @@ int File_op_class::load_file(wstring &path, vector<double> &y)
 	}
 
 	file.close();
+	DBOUT("End of Loading " << path << endl);
+
 	return 0;
 }
 //load all the x and y points in the file into vectors.
 int File_op_class::load_file(wstring &path, vector<double> &x, vector<double> &y)
 {
+	DBOUT("Loading " << path << endl);
+
 	x.clear();
 	y.clear();
 	x.reserve(600000);
@@ -127,6 +132,8 @@ int File_op_class::load_file(wstring &path, vector<double> &x, vector<double> &y
 	}
 
 	file.close();
+	DBOUT("End of Loading " << path << endl);
+
 	return 0;
 #else
 
@@ -292,7 +299,7 @@ void File_op_class::generate_sinwave(const float sampling_freq, float freq, floa
 	{
 		y.push_back
 			(
-			amp * sin(freq * 2 * PI * i / sampling_freq) 
+			amp * sin(freq * 2 * PI * i / sampling_freq)
 			);
 	}
 
