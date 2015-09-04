@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include <iostream>
-
+#include "debug.h"
 #include <cmath>
 #include <fstream>
 #include <sstream>
@@ -31,7 +31,7 @@ namespace statistics
 		float variance = (float)sum / size;
 		return variance;
 	}
-	pair<double, double> find_peak(const vector<double> &data, uint low_bd, uint high_bd)
+	pair<double, double> find_peak(const vector<double>& data, unsigned int low_bd =1, unsigned int high_bd =0)
 	{
 		if (high_bd == 0)
 			high_bd = data.size();
@@ -156,7 +156,7 @@ namespace statistics
 		// if no zero cross, report for now. Should do a dc offset remove.
 		if (minpts.size() == 0 || maxpts.size() == 0)
 		{
-			DBOUT("no peaks are found...max = " << loc_max.second << "; min = " << loc_min.second << endl);
+			//DBOUT("no peaks are found...max = " << loc_max.second << "; min = " << loc_min.second << endl);
 			avg_ampliltude_mm = fabs(loc_max.second) - fabs(loc_min.second);
 			return avg_ampliltude_mm;
 		}
@@ -211,8 +211,12 @@ namespace statistics
 		}
 		ret = ret / data.size();
 		ret = sqrt(ret);
-		DBOUT("RMS = " << ret << endl);
+		//DBOUT("RMS = " << ret << endl);
 
 		return ret;
+	}
+	int hello()
+	{
+		return 1;
 	}
 }

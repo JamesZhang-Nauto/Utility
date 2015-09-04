@@ -1,4 +1,4 @@
-#include   "stdafx.h"
+//#include   "stdafx.h"
 #include   "debug.h"
 #include   <stdio.h>
 #include   <cmath>

@@ -2,7 +2,7 @@
 #include "File_operator.h"
 #include "windows.h"
 #include <tchar.h>
-
+#include "debug.h"
 //save points into a file with a comma as the splitter.
 void File_op_class::save_to_file(wstring &save_to_fname, vector<double> &x, vector<double> &y)
 {

@@ -7,13 +7,16 @@
 #include <sstream>
 #include <vector>
 
+#define DBOUT( s )            \
+{                             \
+   std::wostringstream os_;    \
+   os_ << s;                   \
+   OutputDebugStringW( os_.str().c_str() );  \
+}
 
-#ifdef _WIN32_WINNT
 // Define the location for saving a logging file.
    #define LOG_LOC "C:\\log.txt"
-#else _WIN32_WCE
-   #define LOG_LOC "\\HardDisk2\\data\\cgn_files\\log.txt"
-#endif
+
 
 void Log(char*);
 void Log(int);
